@@ -101,7 +101,7 @@ export default function BlogPage() {
 
           {/* IMAGE */}
           <img
-            src="src/components/img/logo/b_details01.jpg"
+            src="https://htmldemo.zcubethemes.com/bots/img/blog/b_details01.jpg"
             alt="blog"
             className="w-full rounded-2xl mt-12"
           />

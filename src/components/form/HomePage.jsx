@@ -31,7 +31,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }} className="relative">
-          <img src="src/components/img/logo/sert-img-01.jpg" alt="AI Head" className="rounded-2xl shadow-2xl" />
+          <img src="https://htmldemo.zcubethemes.com/bots/img/bg/sert-img-01.jpg" alt="AI Head" className="rounded-2xl shadow-2xl" />
         </motion.div>
       </section>
 
@@ -71,7 +71,7 @@ export default function HomePage() {
   {/* LEFT IMAGE */}
   <div className="relative">
     <img
-      src="src/components/img/logo/faq-img.png"
+      src="https://htmldemo.zcubethemes.com/bots/img/gallery/protfolio-img06.png"
       alt="Neural Network"
       className="rounded-2xl shadow-2xl"
     />
@@ -112,12 +112,12 @@ export default function HomePage() {
 
       {/* STATS */}
       <section className="px-6 lg:px-24 py-20 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <img src="src/components/img/logo/about-img-03.png" className="rounded-xl object-cover h-full" />
+        <img src="https://htmldemo.zcubethemes.com/bots/img/features/about-img-02.png" className="rounded-xl object-cover h-full" />
         <div className="bg-gradient-to-br from-slate-900 to-black rounded-xl flex flex-col items-center justify-center text-center p-8">
           <h3 className="text-5xl font-bold">50k+</h3>
           <span className="text-gray-400">Happy Clients</span>
         </div>
-        <img src="src/components/img/logo/about-img-02.png" className="rounded-xl object-cover h-full" />
+        <img src="https://htmldemo.zcubethemes.com/bots/img/features/about-img-03.png" className="rounded-xl object-cover h-full" />
         <div className="bg-gradient-to-br from-slate-900 to-black rounded-xl flex flex-col items-center justify-center text-center p-8">
           <h3 className="text-5xl font-bold">4.9★</h3>
           <span className="text-gray-400">100+ Reviews</span>

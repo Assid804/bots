@@ -9,32 +9,32 @@ const teamMembers = [
   {
     name: "Alister Cook",
     role: "Business & Management",
-    img: "src/components/img/logo/team01.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team01.png",
   },
   {
     name: "Theresa Webb",
     role: "Health & Care",
-    img: "src/components/img/logo/team02.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team02.png",
   },
   {
     name: "Darrell Steward",
     role: "Bachelor Law",
-    img: "src/components/img/logo/team03.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team03.png",
   },
   {
     name: "Cameron Diaz",
     role: "AI Engineer",
-    img: "src/components/img/logo/team04.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team04.png",
   },
   {
     name: "Robert Fox",
     role: "Product Designer",
-    img: "src/components/img/logo/team05.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team05.png",
   },
   {
     name: "Bessie Cooper",
     role: "Data Scientist",
-    img: "src/components/img/logo/team06.png",
+    img: "https://htmldemo.zcubethemes.com/bots/img/team/team06.png",
   },
 ]
 
