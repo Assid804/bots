@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Star, ArrowLeft, ArrowRight, Sparkle, Sparkles } from "lucide-react"
-import { useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Star, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -29,25 +29,44 @@ const testimonials = [
     image: "https://i.pravatar.cc/150?img=12",
     text: "The SOP we received as part of the final exam was so good, I printed it out and gave it to every hire after.",
   },
-]
+];
 
 export default function Testimonials() {
-  const scrollRef = useRef(null)
-  const [progress, setProgress] = useState(0)
+  const scrollRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const scroll = (dir) => {
-    if (!scrollRef.current) return
-    const amount = dir === "left" ? -420 : 420
-    scrollRef.current.scrollBy({ left: amount, behavior: "smooth" })
-  }
+    if (!scrollRef.current) return;
+    const amount = dir === "left" ? -420 : 420;
+    scrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
+  };
 
   const handleScroll = () => {
-    const el = scrollRef.current
-    if (!el) return
+    const el = scrollRef.current;
+    if (!el) return;
+    const percent = el.scrollLeft / (el.scrollWidth - el.clientWidth);
+    setProgress(percent * 100);
+  };
 
-    const percent = el.scrollLeft / (el.scrollWidth - el.clientWidth)
-    setProgress(percent * 100)
-  }
+  // Auto-scroll on small screens
+  useEffect(() => {
+    if (window.innerWidth > 768) return; // only mobile
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      if (!scrollRef.current) return;
+      const el = scrollRef.current;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (el.scrollLeft >= maxScroll - 10) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: 350, behavior: "smooth" });
+      }
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section className="relative w-full min-h-screen bg-gradient-to-br from-[#080b14] via-[#12162a] to-[#2a1838] text-white px-8 py-24 overflow-hidden">
@@ -57,9 +76,15 @@ export default function Testimonials() {
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         {/* Left */}
-        <div className="space-y-6">
+        <motion.div
+          className="space-y-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <span className="inline-flex items-center gap-2 px-4 py-1 rounded-lg border border-white/20 text-sm bg-gradient-to-r from-orange-950 to-purple-900 backdrop-blur">
-          <Sparkles size={16} className="text-purple-400" /> Our Clients Review
+            <Sparkles size={16} className="text-purple-400" /> Our Clients Review
           </span>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight">
             Seamless Integration
@@ -70,18 +95,25 @@ export default function Testimonials() {
             We build intelligent AI agents that automate tasks, streamline workflows,
             and think like your best employee — only faster.
           </p>
-        </div>
+        </motion.div>
 
         {/* Right */}
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className=" flex gap-8 overflow-hidden scroll-smooth pb-10 "
+            className="flex gap-8 overflow-hidden scroll-smooth pb-10"
           >
             {testimonials.map((t, i) => (
               <motion.div
                 key={i}
+                className="flex-shrink-0"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
@@ -106,11 +138,11 @@ export default function Testimonials() {
               className="rounded-full w-14 h-14 cursor-pointer hover:bg-gradient-to-r from-purple-950 to-orange-900"
               onClick={() => scroll("left")}
             >
-              <ArrowLeft className="w-6 h-6 text-white ci" />
+              <ArrowLeft className="w-6 h-6 text-white" />
             </Button>
             <Button
               size="icon"
-              className="rounded-full w-14 h-14 cursor-pointer hover:bg-gradient-to-r  from-orange-950 to-purple-900"
+              className="rounded-full w-14 h-14 cursor-pointer hover:bg-gradient-to-r from-orange-950 to-purple-900"
               onClick={() => scroll("right")}
             >
               <ArrowRight className="w-6 h-6 text-white" />
@@ -119,7 +151,7 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function TestimonialCard({ name, role, image, text }) {
@@ -148,5 +180,5 @@ function TestimonialCard({ name, role, image, text }) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

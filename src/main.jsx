@@ -5,11 +5,27 @@ import { ThemeProvider } from "@/components/ui/Theme-provider.jsx"
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
+import GetStarted from './pages/GetStarted'
+import ContactPage from './pages/Contactus'
+import HomePage from './components/form/HomePage'
+import ServiceDetails from './pages/ServiceDetail'
+import Gallary from './components/form/Gallary'
+import Team from './components/form/Team'
+import FaqDetail from './components/form/FaqDetail'
+import BlogPage from './components/form/BlogDetails'
 
 
 
 const router = createBrowserRouter([
   {path: '/', element: <Home />},
+   {path: "/get-started", element: <GetStarted/>},
+   {path: "/contact", element: <ContactPage />},
+   {path: "/home", element: <HomePage />},
+   {path: "/services", element: <ServiceDetails />},
+   {path: "/gallery", element: <Gallary />},
+    {path: "/team", element: <Team />},
+    {path: "/faq-details", element: <FaqDetail />},
+     {path: "/blog", element: <BlogPage />},
 ])
 
 

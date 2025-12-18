@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Facebook,
   Instagram,
@@ -6,11 +7,31 @@ import {
   Send,
   MapPin,
   Phone,
-} from "lucide-react"
-import bgImage from "@/components/img/bg/footer-bg.png"
-import logo from "@/components/img/logo/logo.png"
+} from "lucide-react";
+import bgImage from "@/components/img/bg/footer-bg.png";
+import logo from "@/components/img/logo/logo.png";
+import { FaSnapchat } from "react-icons/fa6";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubscribe = () => {
+    if (!email.trim()) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    // Reset error
+    setError("");
+
+    // Simulate API call or integration with your backend
+    setTimeout(() => {
+      setSuccess(true);
+      setEmail("");
+    }, 500);
+  };
+
   return (
     <footer
       className="relative w-full bg-cover bg-center text-white"
@@ -30,16 +51,27 @@ export default function Footer() {
             Subscribe our <br /> Newsletter
           </h4>
 
-          <div className="flex items-center bg-white/10 rounded-lg overflow-hidden">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
             <input
               type="email"
               placeholder="Your Email..."
-              className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder:text-white/50"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder:text-white/50 rounded-lg sm:rounded-r-none border border-white/20"
             />
-            <button className="w-12 h-12 cursor-pointer flex items-center justify-center bg-gradient-to-r from-orange-500 to-purple-600">
+            <button
+              onClick={handleSubscribe}
+              className="w-full sm:w-12 h-12 flex items-center justify-center bg-gradient-to-r from-orange-500 to-purple-600 rounded-lg sm:rounded-l-none"
+            >
               <Send size={18} />
             </button>
           </div>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          {success && (
+            <p className="text-green-500 text-sm mt-1">
+              Thank you for Visiting our websites!
+            </p>
+          )}
         </div>
 
         {/* Services */}
@@ -81,17 +113,28 @@ export default function Footer() {
               <Phone size={16} className="text-orange-500" />
               Call
             </h5>
-            <p className="text-sm text-white/70 mt-2">
-              (239) 555-0108
-            </p>
+            <p className="text-sm text-white/70 mt-2">(239) 555-0108</p>
           </div>
 
           {/* Social Icons */}
           <div className="flex gap-3">
-            <SocialIcon><Facebook size={16} /></SocialIcon>
-            <SocialIcon><Instagram size={16} /></SocialIcon>
-            <SocialIcon><Twitter size={16} /></SocialIcon>
-            <SocialIcon><Dribbble size={16} /></SocialIcon>
+            <a href="https://www.snapchat.com/web">
+            <SocialIcon> 
+              <FaSnapchat  size={16}  />
+            </SocialIcon>
+            </a>
+            <a href="https://www.instagram.com/luka_sabbat/?__pwa=1">
+            <SocialIcon>
+              <Instagram size={16} />
+            </SocialIcon>
+            </a>
+            <a href="https://x.com/luka_sabbat999"></a>
+            <SocialIcon>
+              <Twitter size={16} />
+            </SocialIcon>
+            <SocialIcon>
+              <Dribbble size={16} />
+            </SocialIcon>
           </div>
         </div>
       </div>
@@ -103,14 +146,14 @@ export default function Footer() {
           <span className="text-white">@Zcubethemes</span> – 2025. All Rights Reserved
         </p>
 
-        <div className="flex gap-6">
+        <div className="flex gap-6 flex-wrap justify-center sm:justify-start">
           <span className="hover:text-white cursor-pointer">Privacy Policy</span>
           <span className="hover:text-white cursor-pointer">Terms of Use</span>
           <span className="hover:text-white cursor-pointer">Security</span>
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
 /* Social Icon */
@@ -119,5 +162,5 @@ function SocialIcon({ children }) {
     <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-gradient-to-r from-orange-900 to-purple-900 transition cursor-pointer">
       {children}
     </div>
-  )
+  );
 }
